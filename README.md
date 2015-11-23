@@ -14,7 +14,7 @@ The naming of the macros is based loosely on the ES7 async/await proposal.
 There is a pair of async/await macros for each of the styles mentioned
 above.
 
-Ideally there would be some kind of "meta data" allowing lispyscript to
+Ideally there would be some kind of "meta data" allowing sugarlisp to
 choose the appropriate macros for a particular library or function you're
 using.
 
