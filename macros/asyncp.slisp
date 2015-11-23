@@ -1,0 +1,13 @@
+;;;;;;;;;;;;;;;;;;;;;;;;; Promises ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; await calls "then" on a returned promise
+(export awaitp (macro (result promisecall then error)
+    (-> ~promisecall (.then
+      (function (~result)
+        ~then)
+      (function (err)
+        ~error)))))
+
+;; async is a no-op for promises
+(export asyncp (macro (func ...rest)
+  (function ~rest)))

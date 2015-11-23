@@ -1,0 +1,27 @@
+;;;;;;;;;;;;;;;;;;;;;;;; Generators ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; note for node you must currently use: node --harmony
+
+#use "async"
+
+;; await "yields" the result assuming some "task runner" resumes us
+;; plus try/catches work!! yay!!
+(export awaitgen (macro (result asynccall then error)
+  (try-
+    (var ~result (yield ~asynccall))
+    ~then
+    (function (err)
+      ~error))))
+
+(export awaitgenPrior (macro (result asynccall then error)
+  (iifegen (try*
+    (var ~result (yield ~asynccall))
+    ~then
+    (function (err)
+      ~error)))))
+
+;; async creates a generator function
+(export asyncgen (macro (func ...rest)
+  (co.wrap (function* ~rest))))
+
+(export iifegen (macro (iifewrapped)
+  ((co.wrap ~iifewrapped))))

@@ -1,0 +1,45 @@
+;;
+;; here's dnode's standard "beepboop" example all in one file
+;; and using the SugarLisp await macro on the client.
+;;
+;; this gets split into client and server using compile time #if
+;; directives selected using sugar's "--for" option (see
+;; make-dnode-std.sh).
+;;
+
+(var dnode (require 'dnode'))
+
+#if (=== transpile.for "server") {
+
+  (var remote {
+     transform: (s, cb) => {
+       (console.log "I got beeped!")
+       ; we return null,result to match the node err,data callback style
+       ; (the await macro expects this style)
+       (cb null ((.toUpperCase (s.replace #/[aeiou]{2,}/ 'oo'))))
+     }
+  })
+
+  (var server (dnode remote))
+  (server.listen 5004)
+  (console.log "Listening for beeps...")
+}
+
+#if (=== transpile.for "client") {
+
+  #use "async"
+  #autoasync             // we'll skip using the "async" keyword
+  (alias await awaitcb)  // and we'll use callbacks behind "await"
+
+  (var d (dnode.connect 5004))
+  (d.on 'remote' (remote) => {
+    // here the await macro receives code blocks it inserts
+    // into it's generated code
+    (await s (remote.transform 'beep') {
+        (console.log 'beep goes ${s}')
+        (d.end)
+    }
+    (console.error 'an error occurred: ${err}'))
+  })
+
+}

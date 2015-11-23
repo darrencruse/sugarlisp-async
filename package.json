@@ -1,0 +1,34 @@
+{
+  "name": "sugarlisp-async",
+  "description": "a common syntax for callbacks/promises/generators/synchronous calls",
+  "keywords": [
+    "async",
+    "asynchronous",
+    "javascript",
+    "language",
+    "sugarlisp",
+    "sugarscript",
+    "compiler",
+    "lisp"
+  ],
+  "author": "Darren Cruse",
+  "version": "0.5.0",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/darrencruse/sugarlisp-async/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "homepage": "https://github.com/darrencruse/sugarlisp-async",
+  "bugs": "https://github.com/darrencruse/sugarlisp-async/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/darrencruse/sugarlisp-async.git"
+  }
+}

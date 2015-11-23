@@ -1,0 +1,47 @@
+
+// in this example we explicitly specify both "async" and
+// "await" as in the es7 standard.  see the other example
+// "filewalk-autoasync.slisp" for an alternative.
+
+#use "async"
+
+// uncomment the appropriate section below
+// to generate code in that style
+
+// for callbacks
+(alias async asynccb)
+(alias await awaitcb)
+(var fs (require 'fs'))
+
+// for promises
+//(alias async asyncp)
+//(alias await awaitp)
+//(require "native-promise-only")
+//(var fs (require "fs-promise"))
+
+// for generators (run with: node --harmony)
+//(alias async asyncgen)
+//(alias await awaitgen)
+//(var co (require 'co'))
+//(var fs (require 'co-fs'))
+
+// for synchronous calls
+//(alias async sync)
+//(alias await awaitsync)
+//(var fs (require 'fs'))
+
+(var walk (async function (rootDir)
+  (await files (fs.readdir rootDir)
+    (each files
+      (async function (file)
+        (var filePath (str rootDir '/' file))
+        (await stats (fs.stat filePath)
+          (if (stats.isDirectory)
+            (||
+              (console.log 'directory:' filePath)
+              (walk filePath))
+            (|| (console.log filePath) true))
+          (console.error "a stat error occurred:" err))))
+    (console.error "a readdir error occurred:" err))))
+
+(walk '.')

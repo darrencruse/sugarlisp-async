@@ -1,0 +1,16 @@
+;;;;;;;;;;;;;;;;;;;;;;; Synchronous ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; await assumes the naming convention that a synchronous version of
+;; the same function ends with "Sync"
+;; plus try/catches work!! yay!!
+(export awaitsync (macro (result asynccall then error)
+  (try
+    (var ~result (str ~(sl.valueOfStr (get 0 asynccall)) 'Sync'))
+    ~then
+    (function (err)
+      ~error))))
+
+;; sync is a no-op for synchronous calls
+;; note the name "sync" seemed the logical complement to "async"
+(export sync (macro (func ...rest)
+  (function ~rest)))

@@ -1,0 +1,12 @@
+;;;;;;;;;;;;;;;;;;;; Node Style Callbacks ;;;;;;;;;;;;;;;;;;;;;
+
+;; await checks the err callback parameter for errors
+(export awaitcb (macro (result asynccall then error)
+  (~@asynccall (function (err ~result)
+    (if err
+      ~error
+      ~then)))))
+
+;; async is a no-op for callbacks
+(export asynccb (macro (func ...rest)
+  (function ~rest)))
