@@ -3,13 +3,13 @@ a common syntax for callbacks/promises/generators/synchronous calls
 
 These SugarLisp macros will generate code appropriate for:
 
-    functions taking node style cb(err,result) callbacks
-    functions returning standard A+ style Promises
-    use with the "co" generator "task runner"
-    synchronous calls via the "Sync" suffix naming convention.
+* functions taking node style cb(err,result) callbacks
+* functions returning standard A+ style Promises
+* use with the "co" generator "task runner"
+* synchronous calls via the "Sync" suffix naming convention.
 
 The naming of the macros is based loosely on the ES7 async/await proposal.
-(but is in no way "spec compliant" - this is lispyscript not javascript!)
+(but is in no way "spec compliant" - this is sugarlisp not javascript!)
 
 There is a pair of async/await macros for each of the styles mentioned
 above.
