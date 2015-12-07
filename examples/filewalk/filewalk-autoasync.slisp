@@ -37,7 +37,7 @@
       (function (file)
         (var filePath (str rootDir '/' file))
         (await stats (fs.stat filePath)
-          (if (stats.isDirectory)
+          (if? (stats.isDirectory)
             (||
               (console.log 'directory:' filePath)
               (walk filePath))
