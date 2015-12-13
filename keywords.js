@@ -2,7 +2,7 @@
  * Javascript code generation for SugarLisp Async
  */
 
-var sl = require('sugarlisp-core/types'),
+var sl = require('sugarlisp-core/sl-types'),
     reader = require('sugarlisp-core/reader');
 
 // THE NEXT TWO VARIATIONS ON TRY WERE PART OF GETTING THE ASYNC GENERATORS APPROACH TO WORK
