@@ -7,10 +7,13 @@
 var utils = require('sugarlisp-core/utils');
 
 module.exports = {
-  syntax: require('./syntax'),
-  keywords: utils.merge(require('./keywords'),
-                       require('./macros/asynccb.js'),
-                       require('./macros/asyncgen-co.js'),
-                       require('./macros/asyncp.js'),
-                       require('./macros/sync.js'))
+  name: "async",
+  lextab: require('./lextab'),
+  readtab: require('./readtab'),
+  gentab: utils.merge(require('./gentab'),
+             require('./macros/asynccb.js'),
+             require('./macros/asyncgen-co.js'),
+             require('./macros/asyncp.js'),
+             require('./macros/sync.js'),
+             require('./macros/sequence.js'))
 };
