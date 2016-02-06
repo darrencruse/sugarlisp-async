@@ -13,15 +13,15 @@ exports["try*"] = function(forms) {
     }
     var c = forms.pop(),
         ind = " ".repeat(this.indent),
-        transpiled = sl.transpiled();
+        generated = sl.generated();
 
-    transpiled.push(["function*() {\n" + ind +
+    generated.push(["function*() {\n" + ind +
            "try {\n", this.transpileExpressions(forms.slice(1)), "\n" +
            ind + "} catch (e) {\n" +
            ind + "return (", (Array.isArray(c) ? this.transpileExpression(c) : c), ")(e);\n" +
            ind + "}\n" + ind + "}"]);
 
-    return transpiled;
+    return generated;
 }
 
 exports["try-"] = function(forms) {
@@ -30,16 +30,16 @@ exports["try-"] = function(forms) {
     }
     var c = forms.pop(),
         ind = " ".repeat(this.indent),
-        transpiled = sl.transpiled();
+        generated = sl.generated();
 
-    transpiled.push(["try {\n", this.transpileExpressions(forms.slice(1)), "\n" +
+    generated.push(["try {\n", this.transpileExpressions(forms.slice(1)), "\n" +
            ind + "} catch (e) {\n" +
            ind + "return (", (Array.isArray(c) ? this.transpileExpression(c) : c), ")(e);\n" +
            ind + "}"]);
 
     this.noReturn = true;
 
-    return transpiled;
+    return generated;
 }
 
 exports["autoasync"] = function(forms) {
